@@ -71,6 +71,8 @@ contract PinkToken is ERC20, Ownable {
         return true;
     }
 
+    // alters the `MAX_TRANSFER` variable, preventing fast buying and selling
+    // utilised in early launch stages ONLY
     function changeMaxTransfer(uint256 amount) public onlyOwner returns(uint256){
         require(amount <= MAX_SUPPLY || amount >= 0 ,"ERROR - Invalid Value");
         
@@ -78,7 +80,9 @@ contract PinkToken is ERC20, Ownable {
         return amount;
     }
 
-
+    // toggles `LOCK` variable between true and false
+    // when false: there is freedom to transfer any token amount 
+    // `LOCK = true` in early launch stages ONLY
     function flipLock() public onlyOwner returns(bool){
         LOCK = !LOCK;
         return(LOCK);
